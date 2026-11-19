@@ -1,0 +1,227 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ca-emeryville",
+  "name": "Emeryville, California",
+  "shortName": "Emeryville",
+  "law": "Emeryville Fair Workweek Ordinance",
+  "region": {
+    "country": "US",
+    "state": "CA",
+    "city": "Emeryville"
+  },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2017-07-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail firms with 56 or more employees globally, and fast food firms with 56 or more employees globally and 20 or more in Emeryville. Franchisees tied to a network of more than 12 locations are covered.",
+    "industries": ["Retail", "Fast food"],
+    "employerThreshold": "56+ employees globally (fast food: also 20+ in Emeryville)",
+    "employees": "Employees who work at least 2 hours a week in Emeryville and are entitled to the California minimum wage. Exempt employees are not covered."
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 days",
+    "citation": {
+      "code": "Emeryville Mun. Code § 5-39.03(b)",
+      "url": "https://ecode360.com/EM4426",
+      "quote": "Covered Employers shall provide Employees with at least two weeks' notice of their Work Schedules ... at least every 14 days (on a Biweekly Schedule)."
+    }
+  },
+  "premiums": [
+    {
+      "id": "cut-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled with less than 24 hours' notice",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "minChangeMinutes": 11,
+      "amount": {
+        "type": "hoursOfPayUpTo",
+        "maxHours": 4,
+        "of": "shift"
+      },
+      "exceptions": [
+        "operations-stopped",
+        "shift-swap",
+        "employee-requested",
+        "overtime",
+        "paid-full-shift"
+      ],
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(c)(2)(i)",
+        "url": "https://ecode360.com/EM4426",
+        "quote": "With less than 24 hours to the Employee, four hours or the number of hours in the Employee's scheduled shift, whichever is less, when hours are canceled or reduced."
+      }
+    },
+    {
+      "id": "other-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours added or shift moved with less than 24 hours' notice",
+      "on": ["add", "extend", "move"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "minChangeMinutes": 11,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "operations-stopped",
+        "shift-swap",
+        "finishing-sale",
+        "employee-requested",
+        "overtime"
+      ],
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(c)(2)(ii)",
+        "url": "https://ecode360.com/EM4426",
+        "quote": "With less than 24 hours to the Employee, one hour of Predictability Pay for all other changes."
+      }
+    },
+    {
+      "id": "change-under-14-days",
+      "group": "schedule-change",
+      "label": "Any change with less than 14 days' but at least 24 hours' notice",
+      "on": ["add", "extend", "move", "reduce", "cancel"],
+      "notice": {
+        "minHours": 24,
+        "maxHours": 336,
+        "to": "shift"
+      },
+      "minChangeMinutes": 11,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "employee-requested",
+        "finishing-sale",
+        "operations-stopped",
+        "overtime",
+        "paid-full-shift",
+        "shift-swap"
+      ],
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(c)(1)",
+        "url": "https://ecode360.com/EM4426",
+        "quote": "For each previously scheduled Shift that the Covered Employer adds or subtracts hours, moves to another date or time, cancels, or each previously unscheduled Shift that the Covered Employer adds: with less than 14 days' notice, but 24 hours or more notice to the Employee, one hour of Predictability Pay."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 11 hours between shifts",
+      "minRestHours": 11,
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.06",
+        "url": "https://ecode360.com/EM4426",
+        "quote": "An Employee who agrees in writing to work hours described in this Section shall be compensated at one-and-a-half times the Employee's regular rate of pay for any hours worked less than 11 hours following the end of a previous shift."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "operations-stopped",
+      "label": "Work couldn't begin or continue",
+      "description": "Threats or a civil authority's recommendation, a utility or sewer failure, or an act of nature, war, civil unrest, strikes or other cause outside the employer's control, for the time operations could not run.",
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(d)(1)-(3)",
+        "url": "https://ecode360.com/EM4426"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "Shift swap or coverage I agreed to with a coworker",
+      "description": "Mutually agreed shift swaps or coverage between employees.",
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(d)(4)",
+        "url": "https://ecode360.com/EM4426"
+      }
+    },
+    {
+      "id": "finishing-sale",
+      "label": "I stayed to finish a sale for commission or tips",
+      "description": "Working past the end of the shift to finish a sale that earns a commission or tips, paid at the regular rate.",
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(d)(5)(a)",
+        "url": "https://ecode360.com/EM4426"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change",
+      "description": "Employee-initiated voluntary changes, such as asking to leave early.",
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(d)(6)",
+        "url": "https://ecode360.com/EM4426"
+      }
+    },
+    {
+      "id": "overtime",
+      "label": "I was paid overtime worth more than the premium",
+      "description": "Overtime paid for the change exceeds the predictability pay otherwise owed.",
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.04(d)(7)",
+        "url": "https://ecode360.com/EM4426"
+      }
+    },
+    {
+      "id": "paid-full-shift",
+      "label": "I was sent home but paid for the whole shift",
+      "description": "The employer paid for the full scheduled shift.",
+      "citation": {
+        "code": "Emeryville Fair Workweek Regulations § 4(e)(ii)",
+        "url": "https://www.emeryville.org/Services/Business/Permits-Regulations/Fair-Workweek-Ordinance"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline hours less than 11 hours after your previous day's shift",
+      "citation": {
+        "code": "Emeryville Mun. Code § 5-39.06",
+        "url": "https://ecode360.com/EM4426"
+      }
+    },
+    {
+      "label": "Extra hours must be offered to current part-time employees first",
+      "citation": {
+        "code": "Emeryville Mun. Code ch. 5-39",
+        "url": "https://ecode360.com/EM4426"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "City of Emeryville, Fair Workweek enforcement",
+    "url": "https://www.emeryville.org/Services/Business/Permits-Regulations/Fair-Workweek-Ordinance",
+    "complaintUrl": "https://www.emeryville.org/files/assets/city/v/1/development/documents/fair-workweek-ordinance/employee-claim-form.final.pdf",
+    "phone": "510-596-4351"
+  },
+  "sources": [
+    {
+      "title": "Emeryville Municipal Code ch. 5-39 (Fair Workweek Employment Standards)",
+      "url": "https://ecode360.com/EM4426"
+    },
+    {
+      "title": "City of Emeryville: Fair Workweek Ordinance (FAQ, poster, regulations)",
+      "url": "https://www.emeryville.org/Services/Business/Permits-Regulations/Fair-Workweek-Ordinance"
+    }
+  ],
+  "notes": [
+    "Starting or ending within 10 minutes of the scheduled time is exempt (§ 5-39.04(d)(5)(b)); Shiftowed applies this as an 11-minute threshold.",
+    "The city's FAQ describes the short-notice cut as the lesser of 4 hours or the remaining hours of the shift; Shiftowed follows the code's wording (the hours in the scheduled shift).",
+    "The rest premium is time and a half on the hours inside the 11-hour window. Shiftowed shows the extra half-time."
+  ]
+}

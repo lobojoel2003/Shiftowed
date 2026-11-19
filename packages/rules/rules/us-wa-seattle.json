@@ -1,0 +1,229 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-wa-seattle",
+  "name": "Seattle, Washington",
+  "shortName": "Seattle",
+  "law": "Secure Scheduling Ordinance",
+  "region": {
+    "country": "US",
+    "state": "WA",
+    "city": "Seattle"
+  },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2017-07-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail and food service establishments with 500 or more employees worldwide. Full-service restaurants are covered if they also have 40 or more full-service locations worldwide.",
+    "industries": ["Retail", "Food services", "Full-service restaurants"],
+    "employerThreshold": "500+ employees worldwide (full-service restaurants: also 40+ full-service locations)",
+    "employees": "Hourly, non-exempt employees who spend at least half their working time at a location in Seattle.",
+    "notes": [
+      "Head count includes part-time, temporary and agency workers, inside or outside Seattle."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 calendar days",
+    "citation": {
+      "code": "SMC 14.22.040",
+      "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC",
+      "quote": "Employers shall provide employees with a written work schedule at least 14 calendar days before the first day of the work schedule."
+    }
+  },
+  "premiums": [
+    {
+      "id": "added-or-moved",
+      "group": "schedule-change",
+      "label": "Hours added, or shift moved without losing hours, after the schedule was posted",
+      "on": ["add", "extend", "move"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1,
+        "prorateAddedHours": true
+      },
+      "exceptions": [
+        "employee-requested",
+        "shift-swap",
+        "mass-communication",
+        "threats",
+        "utility-failure",
+        "natural-disaster"
+      ],
+      "citation": {
+        "code": "SMC 14.22.050.A.1",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC",
+        "quote": "The employer shall compensate the employee with one hour of pay at the employee's scheduled rate of pay, in addition to wages earned, for the following reasons: a. Adding hours of work; or b. Changing the date or start or end time of a work shift with no loss of hours."
+      }
+    },
+    {
+      "id": "hours-lost",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled after the schedule was posted",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "perLostHour",
+        "multiplier": 0.5
+      },
+      "exceptions": [
+        "employee-requested",
+        "shift-swap",
+        "discipline",
+        "threats",
+        "utility-failure",
+        "natural-disaster"
+      ],
+      "citation": {
+        "code": "SMC 14.22.050.A.2",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC",
+        "quote": "The employer shall compensate the employee with no less than one-half times the employee's scheduled rate of pay per hour for any scheduled hours the employee does not work when the employer subtracts hours, cancels a work shift, or changes the date or time of a shift resulting in a loss of hours."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 10 hours between shifts",
+      "minRestHours": 10,
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "SMC 14.22.035.B",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC",
+        "quote": "Employers shall compensate employees at one and one-half times the employee's scheduled rate of pay for the hours worked that are less than ten hours apart. The premium is owed even when the employee asked for or agreed to the hours; split shifts are excluded."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "shift-swap",
+      "label": "Shift swap or coverage I agreed to with a coworker",
+      "description": "Mutually agreed shift swaps or coverage between employees. The employer may require pre-approval.",
+      "citation": {
+        "code": "SMC 14.22.050.B.1",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "id": "mass-communication",
+      "label": "I volunteered for hours offered to a group",
+      "description": "Additional hours the employee volunteered for in response to a written mass communication sent to two or more employees, offering hours that opened because another employee could not work and stating that acceptance is voluntary.",
+      "citation": {
+        "code": "SMC 14.22.050.B.2",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change",
+      "description": "Additions or subtractions of hours requested by the employee and documented in writing.",
+      "citation": {
+        "code": "SMC 14.22.050.B",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "id": "discipline",
+      "label": "Hours cut for documented discipline",
+      "description": "Hours subtracted for disciplinary reasons, documented in writing.",
+      "citation": {
+        "code": "SMC 14.22.050.B",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "id": "threats",
+      "label": "Threats or a public official's recommendation",
+      "description": "Operations could not begin or continue because of threats to employees or property, or on the recommendation of a public official.",
+      "citation": {
+        "code": "SMC 14.22.050.B",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "id": "utility-failure",
+      "label": "Utility or sewer failure",
+      "description": "Operations could not begin or continue because public utilities or the sewer system failed.",
+      "citation": {
+        "code": "SMC 14.22.050.B",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "id": "natural-disaster",
+      "label": "Natural disaster or similar cause",
+      "description": "Operations could not begin or continue because of a natural disaster or another cause outside the employer's control.",
+      "citation": {
+        "code": "SMC 14.22.050.B",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Good-faith estimate of your schedule when hired",
+      "citation": {
+        "code": "SMC Chapter 14.22",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "label": "Right to decline hours added after the schedule is posted",
+      "citation": {
+        "code": "SMC Chapter 14.22",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    },
+    {
+      "label": "Offer of extra hours to current employees before hiring",
+      "citation": {
+        "code": "SMC Chapter 14.22",
+        "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "Seattle Office of Labor Standards",
+    "url": "https://www.seattle.gov/laborstandards/ordinances/secure-scheduling",
+    "complaintUrl": "https://www.seattle.gov/laborstandards/investigations/file-a-complaint",
+    "phone": "206-256-5297"
+  },
+  "sources": [
+    {
+      "title": "Seattle Municipal Code Chapter 14.22",
+      "url": "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT14HURI_CH14.22SESC"
+    },
+    {
+      "title": "Seattle OLS: Secure Scheduling",
+      "url": "https://www.seattle.gov/laborstandards/ordinances/secure-scheduling"
+    },
+    {
+      "title": "Secure Scheduling rules (SHRR Chapter 120)",
+      "url": "https://seattle.gov/documents/Departments/LaborStandards/SS_Rules120.pdf"
+    },
+    {
+      "title": "Secure Scheduling Q&A (OLS)",
+      "url": "https://seattle.gov/documents/Departments/LaborStandards/SS_QA_FINAL_082025v2.pdf"
+    }
+  ],
+  "notes": [
+    "Notice is measured to 12:00 a.m. on the first day of the work schedule: a premium is owed for any change made after the schedule's 14-day posting deadline, whichever shift it affects.",
+    "Seattle pays premiums at the scheduled rate of pay for the affected shift. Enter that rate as your hourly rate.",
+    "Changes of 15 minutes or less owe nothing under the OLS rules; Shiftowed applies this as a 16-minute threshold.",
+    "Additions of less than one hour are pro-rated under the OLS rules (30 minutes added = 30 minutes of pay).",
+    "Not calling in an on-call worker also earns half-time pay; Shiftowed does not track on-call shifts yet."
+  ]
+}

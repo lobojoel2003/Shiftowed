@@ -1,0 +1,258 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-or-oregon",
+  "name": "Oregon (statewide)",
+  "shortName": "Oregon",
+  "law": "Oregon Predictive Scheduling Law (SB 828, 2017)",
+  "region": {
+    "country": "US",
+    "state": "OR"
+  },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2020-07-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail, hospitality and food service employers with 500 or more employees worldwide, including chains and integrated enterprises.",
+    "industries": ["Retail", "Hospitality", "Food services"],
+    "employerThreshold": "500+ employees worldwide",
+    "employees": "Hourly employees whose primary duties are in retail, hospitality or food service. Salaried workers exempt from minimum wage and workers supplied by worker-leasing companies are not covered.",
+    "notes": [
+      "Head count is the average number of employees per working day over 20 or more workweeks in the current or preceding calendar year (ORS 653.422(2))."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 calendar days",
+    "citation": {
+      "code": "ORS 653.436(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html",
+      "quote": "An employer shall provide an employee with a work schedule in writing at least 14 calendar days before the first day of the work schedule."
+    }
+  },
+  "premiums": [
+    {
+      "id": "added-or-moved",
+      "group": "schedule-change",
+      "label": "Hours added, or shift moved without losing hours, with less than 14 days' notice",
+      "on": ["add", "extend", "move"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 31,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "employee-requested",
+        "shift-swap",
+        "threats",
+        "utility-failure",
+        "natural-disaster",
+        "ticketed-event",
+        "standby-list",
+        "voluntary-extra-hours",
+        "leave-coverage"
+      ],
+      "citation": {
+        "code": "ORS 653.455(2)(a)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html",
+        "quote": "One hour of pay at the employee's regular rate of pay, in addition to wages earned, when the employer adds more than 30 minutes of work to the employee's work shift, changes the date or start or end time of the work shift with no loss of hours, or schedules an additional work shift or on-call shift."
+      }
+    },
+    {
+      "id": "hours-lost",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled with less than 14 days' notice",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 31,
+      "amount": {
+        "type": "perLostHour",
+        "multiplier": 0.5
+      },
+      "exceptions": [
+        "employee-requested",
+        "shift-swap",
+        "discipline",
+        "threats",
+        "utility-failure",
+        "natural-disaster",
+        "ticketed-event",
+        "leave-coverage"
+      ],
+      "citation": {
+        "code": "ORS 653.455(2)(b)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html",
+        "quote": "One-half times the employee's regular rate of pay per hour for each scheduled hour that the employee does not work when the employer subtracts hours from a regular or on-call work shift, changes the date or time of a work shift resulting in a loss of work shift hours, or cancels a regular or on-call work shift."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 10 hours between shifts",
+      "minRestHours": 10,
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "ORS 653.442(2)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html",
+        "quote": "An employer shall compensate an employee at one and one-half times the employee's regular rate of pay for the hours worked in a work shift that are less than 10 hours after the end of the previous calendar day's work shift. Consent to work the hours does not waive the premium (OAR 839-026-0040)."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change",
+      "description": "The change was requested by the employee and documented in writing.",
+      "citation": {
+        "code": "ORS 653.455(3)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "Shift swap or coverage I agreed to with a coworker",
+      "description": "Employee-initiated shift swaps or coverage agreed between employees. The employer may require pre-approval.",
+      "citation": {
+        "code": "ORS 653.455(3)(b)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "discipline",
+      "label": "Hours cut for documented discipline",
+      "description": "Hours reduced for disciplinary reasons with just cause, documented in writing.",
+      "citation": {
+        "code": "ORS 653.455(3)(e)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "threats",
+      "label": "Threats or a public official's recommendation",
+      "description": "Operations could not begin or continue because of threats to employees or property, or on the recommendation of a public official.",
+      "citation": {
+        "code": "ORS 653.455(3)(f)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "utility-failure",
+      "label": "Utility or sewer failure",
+      "description": "Operations could not begin or continue because public utilities (electricity, water or gas) or the sewer system failed.",
+      "citation": {
+        "code": "ORS 653.455(3)(g)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "natural-disaster",
+      "label": "Natural disaster or similar cause",
+      "description": "Operations could not begin or continue because of a natural disaster or a similar cause outside the employer's control.",
+      "citation": {
+        "code": "ORS 653.455(3)(h)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "ticketed-event",
+      "label": "Ticketed event cancelled or moved",
+      "description": "A ticketed event was cancelled or rescheduled for reasons outside the employer's control.",
+      "citation": {
+        "code": "ORS 653.455(3)(i)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "standby-list",
+      "label": "I'm on the voluntary standby list and agreed to the hours",
+      "description": "An employee on a voluntary standby list agreed to work the additional hours (ORS 653.432).",
+      "citation": {
+        "code": "ORS 653.455(3)(j)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "voluntary-extra-hours",
+      "label": "I agreed in writing to extra hours for an absence or rush",
+      "description": "Extra hours for unanticipated customer needs or an unexpected absence that the employee consented to in writing, after any standby list was contacted.",
+      "citation": {
+        "code": "ORS 653.455(3)(k)",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "id": "leave-coverage",
+      "label": "Covering for a coworker's protected leave",
+      "description": "The employer had less than 14 days' notice of another employee's protected leave (or return from leave) and changed this schedule to cover it. Added by SB 1515 (2024).",
+      "citation": {
+        "code": "ORS 653.455(3)(L)",
+        "url": "https://olis.oregonlegislature.gov/liz/2024R1/Downloads/MeasureDocument/SB1515/Enrolled"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Good-faith estimate of your schedule when hired",
+      "citation": {
+        "code": "ORS 653.412 to 653.485",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "label": "Right to decline hours not on your posted schedule",
+      "citation": {
+        "code": "ORS 653.412 to 653.485",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    },
+    {
+      "label": "Right to ask for schedule preferences without retaliation",
+      "citation": {
+        "code": "ORS 653.412 to 653.485",
+        "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "Oregon Bureau of Labor and Industries (BOLI)",
+    "url": "https://www.oregon.gov/boli/workers/pages/predictive-scheduling.aspx",
+    "complaintUrl": "https://www.oregon.gov/boli/workers/pages/complaint.aspx",
+    "phone": "971-245-3844"
+  },
+  "sources": [
+    {
+      "title": "ORS Chapter 653 (Oregon Legislature)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors653.html"
+    },
+    {
+      "title": "OAR Chapter 839, Division 26 (BOLI rules)",
+      "url": "https://secure.sos.state.or.us/oard/displayDivisionRules.action?selectedDivision=4706"
+    },
+    {
+      "title": "BOLI: Predictive scheduling for workers",
+      "url": "https://www.oregon.gov/boli/workers/pages/predictive-scheduling.aspx"
+    },
+    {
+      "title": "SB 1515 (2024) enrolled text",
+      "url": "https://olis.oregonlegislature.gov/liz/2024R1/Downloads/MeasureDocument/SB1515/Enrolled"
+    }
+  ],
+  "notes": [
+    "Notice is measured to 12:00 a.m. on the first day of the work schedule: a premium is owed for any change made after the schedule's 14-day posting deadline, whichever shift it affects.",
+    "Changes to the start or end time of 30 minutes or less owe nothing (ORS 653.455(3)(a)); Shiftowed applies this as a 31-minute threshold.",
+    "Premiums use the regular rate of pay, which includes shift differentials but not tips, bonuses or overtime premiums.",
+    "Not calling in an on-call worker also earns half-time pay; Shiftowed does not track on-call shifts yet."
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ny-nyc-fast-food",
+  "name": "New York City: Fast Food",
+  "shortName": "NYC Fast Food",
+  "law": "NYC Fair Workweek Law (fast food)",
+  "region": { "country": "US", "state": "NY", "city": "New York" },
+  "timeZone": "America/New_York",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2017-11-26",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Fast food establishments in New York City that are part of a chain with 30 or more establishments nationally, counting franchisor and franchisees together. Includes counters inside other businesses.",
+    "industries": ["Fast food (limited-service restaurants)"],
+    "employerThreshold": "Chain of 30+ establishments nationally",
+    "employees": "Employees in NYC whose duties include customer service, cooking, food or drink preparation, delivery, security, stocking, cleaning or routine maintenance. Salaried, FLSA-exempt employees are not covered.",
+    "notes": [
+      "Since July 4, 2021 employers must also give each worker a regular schedule, and posted schedules may not vary from it by more than 15% without written consent (Local Law 2 of 2021)."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 days",
+    "citation": {
+      "code": "NYC Admin. Code § 20-1221(b); 6 RCNY § 7-621(a)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A",
+      "quote": "For all subsequent work schedules, the fast food employer shall provide such notice no later than 14 days before the first day of any new schedule. (The first day begins at 12:00 a.m.; 14 days means at least 336 hours before it.)"
+    }
+  },
+  "premiums": [
+    {
+      "id": "added-or-moved-7-13-days",
+      "group": "schedule-change",
+      "label": "Hours added or shift moved (no hours lost), 7 to 13 days' notice",
+      "on": ["add", "extend", "move"],
+      "notice": { "minHours": 168, "maxHours": 336, "to": "schedule" },
+      "minChangeMinutes": 16,
+      "amount": { "type": "flat", "dollars": 10 },
+      "exceptions": [
+        "operations-stopped",
+        "employee-requested",
+        "shift-swap",
+        "overtime",
+        "absent"
+      ],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(a)(1)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A",
+        "quote": "With less than 14 days' notice but at least 7 days' notice to the employee, $10 for each change to the work schedule in which: (a) Additional hours or shifts are added pursuant to subdivision d of section 20-1221; or (b) The date or start or end time of a regular shift or on-call shift is changed with no loss of hours."
+      }
+    },
+    {
+      "id": "cut-7-13-days",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled, 7 to 13 days' notice",
+      "on": ["reduce", "cancel"],
+      "notice": { "minHours": 168, "maxHours": 336, "to": "schedule" },
+      "minChangeMinutes": 16,
+      "amount": { "type": "flat", "dollars": 20 },
+      "exceptions": [
+        "operations-stopped",
+        "employee-requested",
+        "shift-swap",
+        "overtime",
+        "absent",
+        "paid-scheduled-hours"
+      ],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(a)(2)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A",
+        "quote": "With less than 14 days' notice but at least 7 days' notice to the employee, $20 for each change to the work schedule in which: (a) Hours are subtracted from a regular or on-call shift; or (b) A regular or on-call shift is cancelled."
+      }
+    },
+    {
+      "id": "added-or-moved-under-7-days",
+      "group": "schedule-change",
+      "label": "Hours added or shift moved (no hours lost), less than 7 days' notice",
+      "on": ["add", "extend", "move"],
+      "notice": { "maxHours": 168, "to": "schedule" },
+      "minChangeMinutes": 16,
+      "amount": { "type": "flat", "dollars": 15 },
+      "exceptions": [
+        "operations-stopped",
+        "employee-requested",
+        "shift-swap",
+        "overtime",
+        "absent"
+      ],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(a)(3)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A",
+        "quote": "With less than 7 days' notice to the employee, $15 for each change to the work schedule in which: (a) Additional hours or shifts are added pursuant to subdivision d of section 20-1221; or (b) The date or start or end time of a regular shift or on-call shift is changed with no loss of hours."
+      }
+    },
+    {
+      "id": "cut-under-7-days",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled, less than 7 days' but at least 24 hours' notice",
+      "on": ["reduce", "cancel"],
+      "notice": { "minHours": 24, "maxHours": 168, "to": "schedule" },
+      "minChangeMinutes": 16,
+      "amount": { "type": "flat", "dollars": 45 },
+      "exceptions": [
+        "operations-stopped",
+        "employee-requested",
+        "shift-swap",
+        "overtime",
+        "absent",
+        "paid-scheduled-hours"
+      ],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(a)(4)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A",
+        "quote": "With less than 7 days' notice but at least 24 hours' notice to the employee, $45 for each change to the work schedule in which: (a) Hours are subtracted from a regular or on-call shift; or (b) A regular or on-call shift is cancelled."
+      }
+    },
+    {
+      "id": "cut-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled, less than 24 hours' notice",
+      "on": ["reduce", "cancel"],
+      "notice": { "maxHours": 24, "to": "schedule" },
+      "minChangeMinutes": 16,
+      "amount": { "type": "flat", "dollars": 75 },
+      "exceptions": [
+        "operations-stopped",
+        "employee-requested",
+        "shift-swap",
+        "overtime",
+        "absent",
+        "paid-scheduled-hours"
+      ],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(a)(5)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A",
+        "quote": "With less than 24 hours' notice to the employee, $75 for each change to the work schedule in which: (a) Hours are subtracted from a regular or on-call shift; or (b) A regular or on-call shift is cancelled."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "clopening",
+      "label": "Clopening: less than 11 hours between shifts on consecutive days",
+      "minRestHours": 11,
+      "amount": { "type": "flat", "dollars": 100 },
+      "citation": {
+        "code": "NYC Admin. Code § 20-1231",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5341292&GUID=B95F2768-AFD0-46C7-8F8E-321CFAA4BA53",
+        "quote": "No fast food employer shall require any fast food employee to work two shifts with fewer than 11 hours between the end of the first shift and the beginning of the second shift when the first shift ends the previous calendar day or spans two calendar days. The fast food employer shall pay the fast food employee $100 for each instance that the employee works such shifts."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "operations-stopped",
+      "label": "The store couldn't open or stay open",
+      "description": "Operations could not begin or continue because of threats to employees or property, a utility failure or public transit shutdown, fire, flood or other natural disaster, a declared state of emergency, or severe weather. Workers called in to cover someone who couldn't travel are still owed the premium.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(c)(1)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I asked for this exact change in writing",
+      "description": "The employee requested the change in writing, and the request referred to this specific change (for added time, before the work was done). Agreeing to a change the employer asked for does not count.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(c)(2); 6 RCNY § 7-622(i)",
+        "url": "https://rules.cityofnewyork.us/wp-content/uploads/2022/01/DCWP-Fair-Workweek-NOA.pdf"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "I traded shifts with a coworker",
+      "description": "A voluntary shift trade between two employees, including a drop and pick-up in a scheduling app. Picking up an open shift that is not a trade does not count.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(c)(3); 6 RCNY § 7-622(h)",
+        "url": "https://rules.cityofnewyork.us/wp-content/uploads/2022/01/DCWP-Fair-Workweek-NOA.pdf"
+      }
+    },
+    {
+      "id": "overtime",
+      "label": "The change was paid as overtime",
+      "description": "The employer had to pay overtime for the changed shift.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(c)(4)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A"
+      }
+    },
+    {
+      "id": "absent",
+      "label": "I was absent, late, or on leave",
+      "description": "The change happened because the employee was late, did not show up, left early without approval, or took sick or other leave.",
+      "citation": {
+        "code": "6 RCNY § 7-622(d)",
+        "url": "https://rules.cityofnewyork.us/wp-content/uploads/2022/01/DCWP-Fair-Workweek-NOA.pdf"
+      }
+    },
+    {
+      "id": "paid-scheduled-hours",
+      "label": "I was paid for all the hours originally scheduled",
+      "description": "For cuts and cancellations only: the employer paid every originally scheduled hour, without using the employee's paid leave, and kept a record.",
+      "citation": {
+        "code": "6 RCNY § 7-622(g)",
+        "url": "https://rules.cityofnewyork.us/wp-content/uploads/2022/01/DCWP-Fair-Workweek-NOA.pdf"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "A regular schedule, and posted schedules within 15% of it unless you agree in writing",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1221",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=9201327&GUID=F5E7F7E8-11E2-4AD4-8259-5FD8DFE46C3C"
+      }
+    },
+    {
+      "label": "Extra shifts must be offered to current workers before new hires",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1241",
+        "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352272&GUID=61FF7F9A-AC0C-4B90-8011-B7BD29DADDB2"
+      }
+    },
+    {
+      "label": "Premiums are paid with that week's wages and listed separately on your pay stub",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1222(b); 6 RCNY § 7-622(k)",
+        "url": "https://rules.cityofnewyork.us/wp-content/uploads/2022/01/DCWP-Fair-Workweek-NOA.pdf"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "NYC Department of Consumer and Worker Protection (DCWP)",
+    "url": "https://www.nyc.gov/site/dca/workers/workersrights/fastfood-retail-workers.page",
+    "complaintUrl": "https://www.nyc.gov/site/dca/workers/workersrights/file-workplace-complaint.page",
+    "phone": "311 (212-NEW-YORK outside NYC)"
+  },
+  "sources": [
+    {
+      "title": "Local Law 107 of 2017 (Fair Workweek, fast food)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5352273&GUID=6C0DF37B-E95B-4C04-97CA-1DF87CEE521A"
+    },
+    {
+      "title": "Local Law 100 of 2017 (clopening)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=5341292&GUID=B95F2768-AFD0-46C7-8F8E-321CFAA4BA53"
+    },
+    {
+      "title": "Local Law 2 of 2021 (regular schedules)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=9201327&GUID=F5E7F7E8-11E2-4AD4-8259-5FD8DFE46C3C"
+    },
+    {
+      "title": "DCWP Fair Workweek rules, 6 RCNY Ch. 7 Subch. F (effective June 23, 2022)",
+      "url": "https://rules.cityofnewyork.us/rule/fair-workweek-law-for-fast-food-workers/"
+    },
+    {
+      "title": "NYC Administrative Code (current compiled text)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/"
+    }
+  ],
+  "notes": [
+    "Notice is measured from when the revised schedule was sent or posted to 12:00 a.m. on the first day of the work schedule, not to the changed shift (6 RCNY § 7-622(a)). Any change made on or after the day before the schedule starts counts as less than 24 hours' notice.",
+    "Changes that move the start and end times by 15 minutes or less owe nothing (6 RCNY § 7-607); Shiftowed applies this as a 16-minute threshold.",
+    "Agreeing to a change does not waive the premium (6 RCNY § 7-622(b)). The $100 clopening premium is owed even with written consent.",
+    "Workers who are fired are owed premiums for each scheduled shift they lose (§ 20-1274). Shiftowed counts those as cancellations.",
+    "The premium amounts have not changed since 2017 and are not adjusted for inflation."
+  ]
+}

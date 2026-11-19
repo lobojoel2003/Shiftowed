@@ -1,0 +1,200 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ca-san-francisco",
+  "name": "San Francisco: Formula Retail",
+  "shortName": "SF Formula Retail",
+  "law": "Formula Retail Employee Rights Ordinances (FRERO)",
+  "region": { "country": "US", "state": "CA", "city": "San Francisco" },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2015-07-03",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Employers that own or operate a formula retail establishment (chains, including restaurants and banks) with at least 40 establishments worldwide and 20 or more employees in San Francisco. Janitorial and security contractors at those stores are covered too.",
+    "industries": ["Formula retail (chain stores)", "Chain restaurants", "Chain banks"],
+    "employerThreshold": "40+ establishments worldwide and 20+ employees in San Francisco",
+    "employees": "Employees who work at least 2 hours a week in San Francisco and are entitled to the California minimum wage. Exempt employees and work at SFO are not covered.",
+    "notes": ["Nonprofits and government employers are not covered."]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "2 weeks",
+    "citation": {
+      "code": "S.F. Labor & Empl. Code § 42.4(b)",
+      "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272",
+      "quote": "A Formula Retail Establishment shall provide its Employees with at least two weeks' notice of their work schedules by posting the schedule ... at least every 14 days (on a Biweekly Schedule)."
+    }
+  },
+  "premiums": [
+    {
+      "id": "change-under-24-hours",
+      "group": "schedule-change",
+      "label": "Shift moved, cancelled, cut, extended or added with less than 24 hours' notice",
+      "on": ["add", "extend", "move", "reduce", "cancel"],
+      "notice": { "maxHours": 24, "to": "shift" },
+      "amount": {
+        "type": "hoursOfPayByShiftLength",
+        "tiers": [{ "maxShiftHours": 4, "hours": 2 }, { "hours": 4 }]
+      },
+      "exceptions": [
+        "threats",
+        "utility-failure",
+        "natural-disaster",
+        "absence-coverage",
+        "coworker-late",
+        "overtime",
+        "employee-requested",
+        "paid-full-shift"
+      ],
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(c)(2)(B)-(C)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272",
+        "quote": "With less than 24 hours' notice to the Employee, two hours of pay at the Employee's regular hourly rate for each shift of four hours or less; and with less than 24 hours' notice to the Employee, four hours of pay at the Employee's regular hourly rate for each shift of more than four hours."
+      }
+    },
+    {
+      "id": "change-under-7-days",
+      "group": "schedule-change",
+      "label": "Shift moved, cancelled, cut, extended or added with less than 7 days' but at least 24 hours' notice",
+      "on": ["add", "extend", "move", "reduce", "cancel"],
+      "notice": { "minHours": 24, "maxHours": 168, "to": "shift" },
+      "amount": { "type": "hoursOfPay", "hours": 1 },
+      "exceptions": [
+        "threats",
+        "utility-failure",
+        "natural-disaster",
+        "absence-coverage",
+        "coworker-late",
+        "overtime",
+        "employee-requested",
+        "paid-full-shift"
+      ],
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(c)(2)(A)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272",
+        "quote": "For each previously scheduled shift that the Employer moves to another date or time or cancels, or each previously unscheduled shift that the Employer requires the Employee to come into work: with less than seven days' notice but 24 hours or more notice to the Employee, one hour of pay at the Employee's regular hourly rate."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "threats",
+      "label": "Threats or a civil authority's recommendation",
+      "description": "Operations could not begin or continue because of threats to employees or property, or on a civil authority's recommendation.",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(1)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "utility-failure",
+      "label": "Utility or sewer failure",
+      "description": "Operations could not begin or continue because public utilities or the sewer system failed.",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(2)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "natural-disaster",
+      "label": "Act of God or other cause outside the employer's control",
+      "description": "Only when the business functionally cannot open or stay open (OLSE FAQ).",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(3)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "absence-coverage",
+      "label": "Covering for a coworker who gave less than 7 days' notice",
+      "description": "Another employee was absent (illness, vacation or other time off) without giving at least 7 days' notice.",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(4)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "coworker-late",
+      "label": "Covering for a coworker who was late, fired or sent home",
+      "description": "Another employee was late, was fired, or was sent home for discipline.",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(5)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "overtime",
+      "label": "Mandatory overtime",
+      "description": "The change was mandatory overtime.",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(6)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I traded shifts or asked for the change",
+      "description": "The employee traded shifts with another employee or requested the change.",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(e)(7)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "id": "paid-full-shift",
+      "label": "I was sent home but paid for the whole shift",
+      "description": "The employer paid for the full scheduled shift.",
+      "citation": {
+        "code": "OLSE FRERO Rule 4.2",
+        "url": "https://media.api.sf.gov/documents/30._FRERO_Rules_Final.pdf"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "On-call shifts you're not called in for pay 2 hours (4 if the shift is longer than 4 hours)",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code § 42.4(d)",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    },
+    {
+      "label": "Extra hours must be offered to current part-time employees first",
+      "citation": {
+        "code": "S.F. Labor & Empl. Code Art. 42",
+        "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "San Francisco Office of Labor Standards Enforcement (OLSE)",
+    "url": "https://www.sf.gov/information--formula-retail-employee-rights-ordinance",
+    "complaintUrl": "https://sf.gov/report-problem-your-employer",
+    "phone": "415-554-6461"
+  },
+  "sources": [
+    {
+      "title": "S.F. Labor & Employment Code Article 42 (formerly Police Code Art. 33G)",
+      "url": "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_laboremployment/0-0-0-1272"
+    },
+    {
+      "title": "OLSE: Formula Retail Employee Rights Ordinances",
+      "url": "https://www.sf.gov/information--formula-retail-employee-rights-ordinance"
+    },
+    {
+      "title": "FRERO Rules (OLSE)",
+      "url": "https://media.api.sf.gov/documents/30._FRERO_Rules_Final.pdf"
+    },
+    {
+      "title": "FRERO FAQ (August 2025)",
+      "url": "https://media.api.sf.gov/documents/FRERO_FAQs_8.8.25_9iS2npC.pdf"
+    }
+  ],
+  "notes": [
+    "Changes made 7 or more days ahead owe nothing in San Francisco, even though schedules are due 2 weeks ahead.",
+    "The code tiers the under-24-hours premium by the length of the shift. OLSE Rules 5.1 to 5.3 instead tier it by the hours added, cut or moved (2 hours for 4 hours or less, 4 hours for more). Shiftowed follows the code; for a partial change the agency may award less.",
+    "San Francisco has no rest-between-shifts premium.",
+    "On-call shifts are not tracked by Shiftowed yet."
+  ]
+}

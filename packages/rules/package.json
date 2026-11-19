@@ -1,0 +1,66 @@
+{
+  "name": "@shiftowed/rules",
+  "version": "1.0.0",
+  "description": "Open-data Fair Workweek (predictive scheduling) rules for US cities and states, plus a TypeScript engine that turns schedule changes into predictability-pay findings with citations.",
+  "license": "MIT",
+  "author": "Joel Stain Lobo (https://github.com/lobojoel2003)",
+  "homepage": "https://github.com/lobojoel2003/Shiftowed/tree/main/packages/rules#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lobojoel2003/Shiftowed.git",
+    "directory": "packages/rules"
+  },
+  "bugs": {
+    "url": "https://github.com/lobojoel2003/Shiftowed/issues"
+  },
+  "keywords": [
+    "fair-workweek",
+    "predictive-scheduling",
+    "predictability-pay",
+    "labor-law",
+    "worker-rights",
+    "open-data",
+    "scheduling"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./rules/*.json": "./rules/*.json",
+    "./schema/jurisdiction.schema.json": "./schema/jurisdiction.schema.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "shiftowed-rules": "./bin/shiftowed-rules.js"
+  },
+  "files": [
+    "dist/src",
+    "dist/rules",
+    "rules",
+    "schema",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "node scripts/gen-registry.mjs && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "validate": "vitest run test/rules-data.test.ts",
+    "prepack": "npm run build",
+    "gen": "node scripts/gen-registry.mjs"
+  }
+}

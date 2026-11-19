@@ -1,0 +1,241 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ca-berkeley",
+  "name": "Berkeley, California",
+  "shortName": "Berkeley",
+  "law": "Berkeley Fair Workweek Ordinance",
+  "region": {
+    "country": "US",
+    "state": "CA",
+    "city": "Berkeley"
+  },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2024-01-12",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "The City of Berkeley, and employers with 10 or more employees in Berkeley in building services, healthcare, hotels, manufacturing, retail or warehouse services with 56 or more employees globally; restaurants with 100 or more globally; retail or restaurant franchisees whose network employs 100 or more; and nonprofits in those industries with 100 or more.",
+    "industries": [
+      "Building services",
+      "Healthcare",
+      "Hotels",
+      "Manufacturing",
+      "Retail",
+      "Warehouse services",
+      "Restaurants"
+    ],
+    "employerThreshold": "10+ in Berkeley and 56+ globally (restaurants, franchisees and nonprofits: 100+)",
+    "employees": "Non-exempt employees who work at least 2 hours a week in Berkeley and are entitled to the California minimum wage."
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 days",
+    "citation": {
+      "code": "Berkeley Mun. Code § 13.102.050(b)",
+      "url": "https://berkeley.municipal.codes/BMC/13.102",
+      "quote": "Employers shall provide employees with at least two weeks' notice of their work schedules."
+    }
+  },
+  "premiums": [
+    {
+      "id": "cut-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled with less than 24 hours' notice",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "minChangeMinutes": 11,
+      "amount": {
+        "type": "hoursOfPayUpTo",
+        "maxHours": 4,
+        "of": "lost"
+      },
+      "exceptions": [
+        "shift-swap",
+        "employee-requested",
+        "operations-stopped",
+        "manufacturing",
+        "healthcare"
+      ],
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(c)(2)(i)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102",
+        "quote": "With less than 24 hours notice to the employee, when hours are cancelled or reduced, four hours or the number of cancelled or reduced hours in the employee's scheduled shift, whichever is less."
+      }
+    },
+    {
+      "id": "other-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours added or shift moved with less than 24 hours' notice",
+      "on": ["add", "extend", "move"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "minChangeMinutes": 11,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "shift-swap",
+        "employee-requested",
+        "finishing-customer",
+        "operations-stopped",
+        "manufacturing",
+        "healthcare"
+      ],
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(c)(2)(ii)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102",
+        "quote": "With less than 24 hours notice to the employee, for additions and all other changes, one hour of predictability pay."
+      }
+    },
+    {
+      "id": "change-under-14-days",
+      "group": "schedule-change",
+      "label": "Any change with less than 14 days' but at least 24 hours' notice",
+      "on": ["add", "extend", "move", "reduce", "cancel"],
+      "notice": {
+        "minHours": 24,
+        "maxHours": 336,
+        "to": "shift"
+      },
+      "minChangeMinutes": 11,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "employee-requested",
+        "finishing-customer",
+        "healthcare",
+        "manufacturing",
+        "operations-stopped",
+        "shift-swap"
+      ],
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(c)(1)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102",
+        "quote": "With less than 14 days notice, but 24 hours or more notice to the employee: one hour of predictability pay."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 11 hours between shifts",
+      "minRestHours": 11,
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.080",
+        "url": "https://berkeley.municipal.codes/BMC/13.102",
+        "quote": "An employee who agrees in writing to work hours described in this section shall be compensated at one and one-half times the employee's regular rate of pay for any hours worked less than 11 hours following the end of a previous shift."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "shift-swap",
+      "label": "Shift swap or coverage I agreed to with a coworker",
+      "description": "Mutually agreed shift swaps or coverage between employees.",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(d)(1)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change",
+      "description": "Employee-initiated voluntary changes, such as leaving early or using leave.",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(d)(2)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    },
+    {
+      "id": "finishing-customer",
+      "label": "I stayed up to 30 minutes to finish with a customer",
+      "description": "Up to 30 minutes past the end of the shift to finish serving a customer, paid.",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(d)(3)(i)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    },
+    {
+      "id": "operations-stopped",
+      "label": "Work couldn't begin or continue",
+      "description": "Threats or a civil authority's recommendation, a utility failure, or acts of nature, a pandemic, war, civil unrest or strikes.",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(e)(1)-(3)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    },
+    {
+      "id": "manufacturing",
+      "label": "Manufacturing delay outside the employer's control",
+      "description": "For manufacturers: delays outside the manufacturer's control.",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(e)(4)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    },
+    {
+      "id": "healthcare",
+      "label": "Healthcare disaster or surge",
+      "description": "For healthcare employers: disasters or unexpected surges.",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(e)(5)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline hours not on your posted schedule",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.060(b)",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    },
+    {
+      "label": "Right to decline hours less than 11 hours after your previous shift",
+      "citation": {
+        "code": "Berkeley Mun. Code § 13.102.080",
+        "url": "https://berkeley.municipal.codes/BMC/13.102"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "City of Berkeley, Labor Standards & Enforcement",
+    "url": "https://berkeleyca.gov/doing-business/operating-berkeley/employer-requirements/workforce-standards-and-enforcement",
+    "complaintUrl": "https://berkeleyca.gov/sites/default/files/documents/Rules4workClaimDeclaration-07152022.pdf",
+    "phone": "510-981-5400"
+  },
+  "sources": [
+    {
+      "title": "Berkeley Municipal Code ch. 13.102 (Fair Workweek Employment Standards)",
+      "url": "https://berkeley.municipal.codes/BMC/13.102"
+    },
+    {
+      "title": "Berkeley Fair Workweek FAQ (rev. Aug 23, 2024)",
+      "url": "https://berkeleyca.gov/sites/default/files/documents/Fair%20Workweek%20FAQ_Rev.08.23.24.pdf"
+    },
+    {
+      "title": "City of Berkeley: Workforce standards and enforcement",
+      "url": "https://berkeleyca.gov/doing-business/operating-berkeley/employer-requirements/workforce-standards-and-enforcement"
+    }
+  ],
+  "notes": [
+    "Starting or ending within 10 minutes of the scheduled time is exempt (§ 13.102.060(d)(3)(ii)); Shiftowed applies this as an 11-minute threshold.",
+    "A cut with less than 24 hours' notice pays the hours cut, up to 4 (the city FAQ: a 15-minute cut owes 0.25 hours).",
+    "The rest premium is time and a half on the hours inside the 11-hour window, and stacks with predictability pay. Shiftowed shows the extra half-time.",
+    "Employees paid a salary of at least 40 hours a week at twice the minimum wage are not covered."
+  ]
+}

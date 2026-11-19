@@ -1,0 +1,170 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ca-los-angeles-county",
+  "name": "Los Angeles County (unincorporated areas): Retail",
+  "shortName": "LA County Retail",
+  "law": "Los Angeles County Fair Workweek Ordinance",
+  "region": {
+    "country": "US",
+    "state": "CA",
+    "county": "Los Angeles"
+  },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2025-07-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail employers with 300 or more employees worldwide, for employees who work at least 2 hours a week in unincorporated Los Angeles County.",
+    "industries": ["Retail"],
+    "employerThreshold": "300+ employees worldwide",
+    "employees": "Retail employees who perform at least 2 hours of work in a week in unincorporated Los Angeles County.",
+    "notes": [
+      "Incorporated cities (for example Pasadena or Santa Monica) are not covered. Workers in the City of Los Angeles are covered by the city's own ordinance."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 calendar days",
+    "citation": {
+      "code": "L.A. County Code § 8.102.060",
+      "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf",
+      "quote": "Retail employers must provide a written work schedule at least 14 calendar days before the start of the work period."
+    }
+  },
+  "premiums": [
+    {
+      "id": "added-or-moved",
+      "group": "schedule-change",
+      "label": "New shift, or shift moved without losing time, after the schedule was posted",
+      "on": ["add", "move"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": ["employee-requested", "absence-coverage"],
+      "citation": {
+        "code": "L.A. County Code § 8.102.080",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf",
+        "quote": "One (1) additional hour of pay for a change that does not reduce the Retail Employee's hours; or results in additional work time of more than 15 minutes."
+      }
+    },
+    {
+      "id": "added-time",
+      "group": "schedule-change",
+      "label": "More than 15 minutes added to a shift after the schedule was posted",
+      "on": ["extend"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": ["employee-requested", "absence-coverage"],
+      "citation": {
+        "code": "L.A. County Code § 8.102.080",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf",
+        "quote": "One (1) additional hour of pay for a change that results in additional work time of more than 15 minutes."
+      }
+    },
+    {
+      "id": "hours-lost",
+      "group": "schedule-change",
+      "label": "More than 15 minutes cut, or shift cancelled, after the schedule was posted",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "perLostHour",
+        "multiplier": 0.5
+      },
+      "exceptions": ["employee-requested", "absence-coverage"],
+      "citation": {
+        "code": "L.A. County Code § 8.102.080",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf",
+        "quote": "Half (1/2) of the Retail Employee's regular rate of pay for time the Retail Employee was scheduled to work or on-call but does not work."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 10 hours between shifts",
+      "minRestHours": 10,
+      "premiumHours": "secondShift",
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "L.A. County Code § 8.102.100",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf",
+        "quote": "A premium of time and a half for each hour of the second Shift not separated by at least ten (10) hours."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change",
+      "description": "The change was requested by the employee and documented.",
+      "citation": {
+        "code": "L.A. County Code § 8.102.080",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-FAQs-6.25.25.pdf"
+      }
+    },
+    {
+      "id": "absence-coverage",
+      "label": "I accepted a voluntary change to cover an absence",
+      "description": "The employee accepted a change caused by another employee's absence, after being told acceptance was voluntary and could be declined.",
+      "citation": {
+        "code": "L.A. County Code § 8.102.080",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-FAQs-6.25.25.pdf"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline changes the employer makes after the schedule is posted",
+      "citation": {
+        "code": "L.A. County Code § 8.102.060",
+        "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "L.A. County Department of Consumer and Business Affairs (DCBA), Office of Labor Equity",
+    "url": "https://dcba.lacounty.gov/fairworkweek/",
+    "complaintUrl": "https://dcba.lacounty.gov/fairworkweek/",
+    "phone": "800-593-8222"
+  },
+  "sources": [
+    {
+      "title": "DCBA: Fair Workweek",
+      "url": "https://dcba.lacounty.gov/fairworkweek/"
+    },
+    {
+      "title": "Fair Workweek Ordinance (County Code Chapter 8.102)",
+      "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-7.2025.pdf"
+    },
+    {
+      "title": "Fair Workweek FAQ (June 2025)",
+      "url": "https://dcba.lacounty.gov/wp-content/uploads/2025/06/LA-County-Fair-Workweek-Ordinance-FAQs-6.25.25.pdf"
+    }
+  ],
+  "notes": [
+    "Notice is measured to 12:00 a.m. on the first day of the work schedule: a premium is owed for any change made after the schedule's 14-day posting deadline, whichever shift it affects.",
+    "A 2025 clarifying amendment to § 8.102.080(A)(2) makes predictability pay owed when a start- or end-time change causes a loss of more than 15 minutes. Shiftowed applies a 16-minute threshold to cuts.",
+    "The rest premium is time and a half for each hour of the second shift. Shiftowed shows the extra half-time."
+  ]
+}

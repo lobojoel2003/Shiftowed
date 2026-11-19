@@ -1,0 +1,139 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ny-nyc-retail",
+  "name": "New York City: Retail",
+  "shortName": "NYC Retail",
+  "law": "NYC Fair Workweek Law (retail on-call scheduling)",
+  "region": { "country": "US", "state": "NY", "city": "New York" },
+  "timeZone": "America/New_York",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2017-11-26",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail businesses with 20 or more employees that are primarily engaged in selling consumer goods at one or more stores in New York City.",
+    "industries": ["Retail"],
+    "employerThreshold": "20+ employees",
+    "employees": "All full-time, part-time and temporary employees of a covered retail employer.",
+    "notes": [
+      "\"Primarily engaged\" means more than half of the business's NYC sales in the previous 12 months were consumer goods sold to retail customers (6 RCNY § 7-601).",
+      "Local Law 77 of 2021 extended the same rules to utility safety employees."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 72,
+    "label": "72 hours",
+    "citation": {
+      "code": "NYC Admin. Code § 20-1252(a)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F",
+      "quote": "A retail employer shall provide a retail employee with a written work schedule no later than 72 hours before the first shift on the work schedule."
+    }
+  },
+  "premiums": [],
+  "prohibitions": [
+    {
+      "id": "cancel-within-72-hours",
+      "label": "Shift cancelled or cut within 72 hours of its start",
+      "on": ["cancel", "reduce", "move"],
+      "notice": { "maxHours": 72, "to": "shift" },
+      "minChangeMinutes": 16,
+      "exceptions": ["time-off-request", "shift-swap", "operations-stopped"],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(a)(2); 6 RCNY § 7-651(a)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F",
+        "quote": "A retail employer shall not cancel any regular shift of a retail employee within 72 hours of the scheduled start of such shift. Cutting more than 15 minutes without 72 hours' notice is a cancellation."
+      }
+    },
+    {
+      "id": "added-within-72-hours",
+      "label": "Required to work hours added with less than 72 hours' notice",
+      "on": ["add", "extend"],
+      "notice": { "maxHours": 72, "to": "shift" },
+      "minChangeMinutes": 16,
+      "exceptions": ["consented-in-writing", "shift-swap", "operations-stopped"],
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(a)(3); 6 RCNY § 7-651(c)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F",
+        "quote": "A retail employer shall not require a retail employee to work with fewer than 72 hours' notice, unless the employee consents in writing."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "time-off-request",
+      "label": "I asked for the time off",
+      "description": "The employee requested the time off.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(b)(1)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "I traded shifts with a coworker",
+      "description": "The change was a shift trade between employees.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(b)(2)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F"
+      }
+    },
+    {
+      "id": "operations-stopped",
+      "label": "The store couldn't open or stay open",
+      "description": "Operations could not begin or continue because of threats, a utility failure or public transit shutdown, fire, flood or other natural disaster, or a declared state of emergency.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(b)(3)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F"
+      }
+    },
+    {
+      "id": "consented-in-writing",
+      "label": "I agreed in writing to work the added hours",
+      "description": "The employee consented in writing to work hours added with less than 72 hours' notice.",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(a)(3)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "No on-call shifts, and no being told to call in to find out if you work within 72 hours of a shift",
+      "citation": {
+        "code": "NYC Admin. Code § 20-1251(a)(1), (4)",
+        "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F"
+      }
+    },
+    {
+      "label": "For a late cancellation, relief must include the pay for the time you were scheduled but didn't work",
+      "citation": {
+        "code": "6 RCNY § 7-651(b)",
+        "url": "https://rules.cityofnewyork.us/rule/fair-workweek-law-for-fast-food-workers/"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "NYC Department of Consumer and Worker Protection (DCWP)",
+    "url": "https://www.nyc.gov/site/dca/workers/workersrights/fastfood-retail-workers.page",
+    "complaintUrl": "https://www.nyc.gov/site/dca/workers/workersrights/file-workplace-complaint.page",
+    "phone": "311 (212-NEW-YORK outside NYC)"
+  },
+  "sources": [
+    {
+      "title": "Local Law 99 of 2017 (retail on-call scheduling)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?GUID=7A4E4717-FF0C-4F8D-9BBA-10978FFC0DB7&ID=5341284&M=F"
+    },
+    {
+      "title": "Local Law 77 of 2021 (utility safety employees)",
+      "url": "https://legistar.council.nyc.gov/View.ashx?M=F&ID=9787193&GUID=8F7792C0-D771-4A03-A7A2-9853E0A8026D"
+    },
+    {
+      "title": "DCWP Fair Workweek rules, 6 RCNY Ch. 7 Subch. F",
+      "url": "https://rules.cityofnewyork.us/rule/fair-workweek-law-for-fast-food-workers/"
+    }
+  ],
+  "notes": [
+    "NYC's retail law has no predictability pay. Shiftowed flags prohibited changes as violations you can report; the agency can order back pay and damages.",
+    "Shiftowed checks the 72-hour posting rule against the first day a schedule covers. The law measures it to the first shift, which may be later."
+  ]
+}

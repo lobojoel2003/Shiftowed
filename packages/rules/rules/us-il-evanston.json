@@ -1,0 +1,207 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-il-evanston",
+  "name": "Evanston, Illinois",
+  "shortName": "Evanston",
+  "law": "Evanston Fair Work Week Ordinance",
+  "region": {
+    "country": "US",
+    "state": "IL",
+    "city": "Evanston"
+  },
+  "timeZone": "America/Chicago",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2023-09-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Employers with 100 or more employees in hospitality (hotels with 7+ rooms), food service and restaurants, retail, warehouse, manufacturing or building services. Restaurants need at least 30 locations and 200 employees globally. Franchisees of a network with more than 30 locations are covered.",
+    "industries": [
+      "Hospitality",
+      "Food service and restaurants",
+      "Retail",
+      "Warehouse",
+      "Manufacturing",
+      "Building services"
+    ],
+    "employerThreshold": "100+ employees (restaurants: 30+ locations and 200+ employees globally)",
+    "employees": "Employees who work at least 2 hours a week in Evanston and are entitled to the Illinois minimum wage. There is no wage cap."
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 days",
+    "citation": {
+      "code": "Evanston City Code § 3-34-4(B)(1)",
+      "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR",
+      "quote": "Employers shall post the Work Schedule no later than 14 days before the first day of any new Work Schedule."
+    }
+  },
+  "premiums": [
+    {
+      "id": "cut-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled with less than 24 hours' notice",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "amount": {
+        "type": "hoursOfPayUpTo",
+        "maxHours": 4,
+        "of": "shift"
+      },
+      "exceptions": [
+        "operations-stopped",
+        "shift-swap",
+        "employee-requested",
+        "discipline",
+        "self-scheduling"
+      ],
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(B)(2)(i)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR",
+        "quote": "With less than 24 hours to the Employee: four hours or the number of hours in the Employee's scheduled Shift, whichever is less, when hours are canceled or reduced."
+      }
+    },
+    {
+      "id": "other-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours added or shift moved with less than 24 hours' notice",
+      "on": ["add", "extend", "move"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": ["operations-stopped", "shift-swap", "employee-requested", "self-scheduling"],
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(B)(2)(ii)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR",
+        "quote": "With less than 24 hours to the Employee: one hour of Predictability Pay for all other changes."
+      }
+    },
+    {
+      "id": "change-under-14-days",
+      "group": "schedule-change",
+      "label": "Any change with less than 14 days' but at least 24 hours' notice",
+      "on": ["add", "extend", "move", "reduce", "cancel"],
+      "notice": {
+        "minHours": 24,
+        "maxHours": 336,
+        "to": "shift"
+      },
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "discipline",
+        "employee-requested",
+        "operations-stopped",
+        "self-scheduling",
+        "shift-swap"
+      ],
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(B)(1)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR",
+        "quote": "With less than 14 days' notice, but 24 hours or more notice to the Employee: one hour of Predictability Pay."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 11 hours between shifts",
+      "minRestHours": 11,
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "Evanston City Code § 3-34-7",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR",
+        "quote": "An Employee who agrees in writing to work hours within 11 hours of the Employee's last Shift shall be compensated at one and one-half times the Employee's regular rate of pay for any hours worked less than 11 hours following the end of a previous shift."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "operations-stopped",
+      "label": "Work couldn't begin or continue",
+      "description": "Threats or civil authorities, a utility or sewer failure, acts of nature or weather that prohibits business operations, or war, civil unrest, strikes, threats to public safety or pandemics.",
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(D)(1)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "Shift trade or coverage I agreed to with a coworker",
+      "description": "Mutually agreed shift trades or coverage between employees.",
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(D)(2)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change, confirmed in writing",
+      "description": "An employee-requested change confirmed in writing.",
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(D)(3)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+      }
+    },
+    {
+      "id": "discipline",
+      "label": "Hours cut for documented discipline",
+      "description": "Hours cut for just-cause discipline, documented in writing.",
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(D)(4)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+      }
+    },
+    {
+      "id": "self-scheduling",
+      "label": "I set my own schedule",
+      "description": "Employees who choose their own schedules.",
+      "citation": {
+        "code": "Evanston City Code § 3-34-5(D)(5)",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline hours within 11 hours of your last shift",
+      "citation": {
+        "code": "Evanston City Code § 3-34-7",
+        "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "City of Evanston",
+    "url": "https://www.cityofevanston.org/business/fair_workweek.php"
+  },
+  "sources": [
+    {
+      "title": "Evanston City Code Title 3, Ch. 34 (Fair Work Week)",
+      "url": "https://library.municode.com/il/evanston/codes/code_of_ordinances?nodeId=TIT3BURE_CH34FAWOWEOR"
+    },
+    {
+      "title": "City of Evanston: Fair Workweek",
+      "url": "https://www.cityofevanston.org/business/fair_workweek.php"
+    }
+  ],
+  "notes": [
+    "Ordinance 24-O-23 set an effective date of September 1, 2023; the city reportedly began enforcement on January 1, 2024.",
+    "Evanston's text has no small-change grace period, so every change of a minute or more counts.",
+    "Required extra hours during an exempt emergency earn $2.00 an hour in hazard pay (§ 3-34-5(D)(1)(e)); Shiftowed does not calculate this.",
+    "The rest premium is time and a half on the hours inside the 11-hour window. Shiftowed shows the extra half-time."
+  ]
+}

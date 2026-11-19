@@ -1,0 +1,272 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-il-chicago",
+  "name": "Chicago, Illinois",
+  "shortName": "Chicago",
+  "law": "Chicago Fair Workweek Ordinance",
+  "region": {
+    "country": "US",
+    "state": "IL",
+    "city": "Chicago"
+  },
+  "timeZone": "America/Chicago",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2022-07-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Employers primarily engaged in building services, healthcare, hotels, manufacturing, restaurants, retail or warehouse services with 100 or more employees globally (250 for nonprofits), at least 50 of them covered employees. Restaurants need at least 30 locations and 250 employees globally.",
+    "industries": [
+      "Building services",
+      "Healthcare",
+      "Hotels",
+      "Manufacturing",
+      "Restaurants",
+      "Retail",
+      "Warehouse services"
+    ],
+    "employerThreshold": "100+ employees globally (nonprofits 250+), 50+ of them covered",
+    "employees": "Employees who do most of their work in Chicago and in a covered industry, and earn no more than $33.85 an hour or $64,945.55 a year (2026 thresholds, indexed each July 1). Temp workers are covered after 420 hours on assignment in 18 months.",
+    "notes": [
+      "Franchise businesses limited to 3 or fewer Chicago locations owned by one employer are excluded from the restaurant category.",
+      "Banquet staff who receive a set gratuity are not covered for that event."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 days",
+    "citation": {
+      "code": "Chicago Mun. Code § 6-110-040(b)(1)",
+      "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907",
+      "quote": "Employers shall post the Work Schedule no later than 14 days before the first day of any new Work Schedule beginning July 1, 2022."
+    }
+  },
+  "premiums": [
+    {
+      "id": "cut-under-24-hours",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled with less than 24 hours' notice",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 24,
+        "to": "shift"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "perLostHour",
+        "multiplier": 0.5
+      },
+      "exceptions": [
+        "operations-stopped",
+        "shift-swap",
+        "mutual-agreement",
+        "employee-requested",
+        "discipline",
+        "banquet",
+        "manufacturing",
+        "healthcare",
+        "ticketed-event",
+        "self-scheduling"
+      ],
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(b)(2)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907",
+        "quote": "No less than 50 percent of the Covered Employee's regular rate of pay for any scheduled hours the Covered Employee does not work because the Employer, with less than 24 hours' notice subtracts hours from a regular or on-call shift or cancels a regular or on-call shift, including while the Covered Employee is working on a shift."
+      }
+    },
+    {
+      "id": "changed-after-deadline",
+      "group": "schedule-change",
+      "label": "Hours added, shift moved, or (with more than 24 hours' notice) hours cut, after the 14-day deadline",
+      "on": ["add", "extend", "move", "reduce", "cancel"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": [
+        "operations-stopped",
+        "shift-swap",
+        "mutual-agreement",
+        "employee-requested",
+        "discipline",
+        "banquet",
+        "manufacturing",
+        "healthcare",
+        "ticketed-event",
+        "self-scheduling",
+        "offered-hours"
+      ],
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(b)(1)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907",
+        "quote": "One hour of Predictability Pay for each shift in which the Employer: (A) adds hours of work. (B) changes the date or time of a work shift with no loss of hours. (C) with more than 24 hours' notice, cancels or subtracts hours from a regular or on-call shift."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Shift starting less than 10 hours after the previous day's shift",
+      "minRestHours": 10,
+      "premiumHours": "secondShift",
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.25
+      },
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-070",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907",
+        "quote": "When a Covered Employee works a shift that begins less than 10 hours after the end of the previous day's shift, the Employer shall pay the Covered Employee at a rate of 1.25 times the Covered Employee's regular rate of pay for that shift."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "operations-stopped",
+      "label": "Work couldn't begin or continue",
+      "description": "Threats to people or property or a civil authority's advice, a utility or sewer failure, an act of nature, or war, civil unrest, strikes, threats to public safety or a pandemic.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(1)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "Shift trade or coverage I agreed to with a coworker",
+      "description": "A mutually agreed shift trade or coverage arrangement between employees.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(2)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "mutual-agreement",
+      "label": "My employer and I agreed to it, confirmed in writing",
+      "description": "A change mutually agreed by the employee and employer and confirmed in writing for that change. General consent does not count.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(3)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change, confirmed in writing",
+      "description": "An employee-requested change confirmed in writing, including sick or vacation leave.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(4)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "discipline",
+      "label": "Hours cut for documented discipline",
+      "description": "Hours subtracted for disciplinary reasons with just cause, documented in writing.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(5)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "banquet",
+      "label": "Banquet event changed for reasons outside the employer's control",
+      "description": "Banquet events changed for reasons outside the employer's control, attendance more than 20% above expected, or a new event booked within 48 hours.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(6)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "manufacturing",
+      "label": "Manufacturing event outside the employer's control",
+      "description": "For manufacturing employers: events outside the manufacturer's control.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(7)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "healthcare",
+      "label": "Healthcare disaster, patient need or surge",
+      "description": "For healthcare employers: disasters, specialized patient-care needs, or unexpected surges.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(8)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "ticketed-event",
+      "label": "Ticketed event changed for reasons outside the employer's control",
+      "description": "Ticketed events at venues with 5,000 or more seats, changed for reasons outside the employer's control.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(9)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "self-scheduling",
+      "label": "I set my own schedule",
+      "description": "Employees who choose their own schedules.",
+      "citation": {
+        "code": "Chicago Mun. Code § 6-110-050(d)(10)",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "id": "offered-hours",
+      "label": "I accepted extra hours offered to current staff",
+      "description": "Shifts accepted through the employer's process for offering additional hours to existing employees.",
+      "citation": {
+        "code": "Chicago FWW Rules § 1.06(e)",
+        "url": "https://www.chicago.gov/city/en/depts/dol/rules-and-regulations-portal.html"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline hours not on your posted schedule",
+      "citation": {
+        "code": "Chicago Mun. Code ch. 6-110",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    },
+    {
+      "label": "Extra hours must be offered to current employees first",
+      "citation": {
+        "code": "Chicago Mun. Code ch. 6-110",
+        "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "Chicago Office of Labor Standards",
+    "url": "https://www.chicago.gov/city/en/depts/bacp/supp_info/fairworkweek.html",
+    "complaintUrl": "https://311.chicago.gov/s/service-request?language=en_US",
+    "phone": "311, or 312-744-2211"
+  },
+  "sources": [
+    {
+      "title": "Chicago Municipal Code ch. 6-110 (Fair Workweek)",
+      "url": "https://codelibrary.amlegal.com/codes/chicago/latest/chicago_il/0-0-0-2639907"
+    },
+    {
+      "title": "Chicago Office of Labor Standards: Fair Workweek",
+      "url": "https://www.chicago.gov/city/en/depts/bacp/supp_info/fairworkweek.html"
+    },
+    {
+      "title": "Chicago Department of Labor rules portal (Fair Workweek Rules, effective June 1, 2026)",
+      "url": "https://www.chicago.gov/city/en/depts/dol/rules-and-regulations-portal.html"
+    }
+  ],
+  "notes": [
+    "The 14-day rule is measured to the first day of the work schedule; the 24-hour rule is measured to the start of the shift.",
+    "Changes of 15 minutes or less owe nothing under the 2026 rules (Rule 1.05(a)); Shiftowed applies this as a 16-minute threshold.",
+    "A cut with exactly 24 hours' notice falls between the ordinance's two tiers; Shiftowed treats it as \"more than 24 hours\" (one hour of pay).",
+    "The rest premium is 1.25 times the regular rate for the whole shift. Shiftowed shows the extra quarter-time, since the base pay is already in your wages. It is owed even if you asked for the shifts, and hours over 40 a week get Illinois overtime instead.",
+    "The covered-employee wage thresholds are adjusted every July 1. Check the city's page for the current figures."
+  ]
+}

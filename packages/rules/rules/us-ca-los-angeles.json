@@ -1,0 +1,201 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-ca-los-angeles",
+  "name": "Los Angeles (city): Retail",
+  "shortName": "LA City Retail",
+  "law": "Los Angeles Fair Work Week Ordinance",
+  "region": {
+    "country": "US",
+    "state": "CA",
+    "city": "Los Angeles"
+  },
+  "timeZone": "America/Los_Angeles",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2023-04-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail businesses (principal NAICS codes 44-45) with 300 or more employees globally, for employees who work at least 2 hours a week inside the City of Los Angeles.",
+    "industries": ["Retail"],
+    "employerThreshold": "300+ employees globally",
+    "employees": "Retail employees who perform at least 2 hours of work in a workweek within the City of Los Angeles.",
+    "notes": [
+      "Franchisee employees count toward the threshold only for retail franchises over 15,000 square feet (Office of Wage Standards FAQ).",
+      "The City Council voted in September 2026 to extend the ordinance to fast-food workers. Until that takes effect, only retail is covered here."
+    ]
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 calendar days",
+    "citation": {
+      "code": "LAMC § 185.04",
+      "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361300",
+      "quote": "An Employer shall provide an Employee with a written work schedule at least 14 days before the start of the Work Period."
+    }
+  },
+  "premiums": [
+    {
+      "id": "added-or-moved",
+      "group": "schedule-change",
+      "label": "New shift, or shift moved without losing time, after the schedule was posted",
+      "on": ["add", "move"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": ["employee-requested", "absence-coverage", "offered-hours", "overtime-hours"],
+      "citation": {
+        "code": "LAMC § 185.06.A",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272",
+        "quote": "One additional hour of pay at the regular rate for each change to the date, time or location of a shift that results in no loss of time, or that adds more than 15 minutes of work time."
+      }
+    },
+    {
+      "id": "added-time",
+      "group": "schedule-change",
+      "label": "More than 15 minutes added to a shift after the schedule was posted",
+      "on": ["extend"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 16,
+      "amount": {
+        "type": "hoursOfPay",
+        "hours": 1
+      },
+      "exceptions": ["employee-requested", "absence-coverage", "offered-hours", "overtime-hours"],
+      "citation": {
+        "code": "LAMC § 185.06.A",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272",
+        "quote": "One additional hour of pay at the regular rate for each change that adds more than 15 minutes of work time."
+      }
+    },
+    {
+      "id": "hours-lost",
+      "group": "schedule-change",
+      "label": "Time cut (15 minutes or more) or shift cancelled after the schedule was posted",
+      "on": ["reduce", "cancel"],
+      "notice": {
+        "maxHours": 336,
+        "to": "schedule"
+      },
+      "minChangeMinutes": 15,
+      "amount": {
+        "type": "perLostHour",
+        "multiplier": 0.5
+      },
+      "exceptions": ["employee-requested", "absence-coverage"],
+      "citation": {
+        "code": "LAMC § 185.06.A",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272",
+        "quote": "Half of the regular rate for the scheduled time not worked when the employer cuts scheduled work time by at least 15 minutes or cancels a shift."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 10 hours between shifts",
+      "minRestHours": 10,
+      "premiumHours": "secondShift",
+      "amount": {
+        "type": "perRestHour",
+        "multiplier": 0.5
+      },
+      "citation": {
+        "code": "LAMC § 185.08",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361240",
+        "quote": "An Employer shall not schedule an Employee to work a Shift that starts less than ten hours from the Employee's last Shift without the Employee's written consent. An Employer shall pay an Employee a premium of time and a half for each Shift not separated by at least ten hours."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change",
+      "description": "The employee initiated the change.",
+      "citation": {
+        "code": "LAMC § 185.06.B",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272"
+      }
+    },
+    {
+      "id": "absence-coverage",
+      "label": "I accepted a voluntary change to cover an absence",
+      "description": "The employee accepted an employer-initiated change caused by another employee's absence, after being told that acceptance was voluntary and could be declined.",
+      "citation": {
+        "code": "LAMC § 185.06.B",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272"
+      }
+    },
+    {
+      "id": "offered-hours",
+      "label": "I accepted extra hours offered to current staff",
+      "description": "The employee accepted additional hours offered to existing employees before new hiring, under LAMC § 185.05.",
+      "citation": {
+        "code": "LAMC § 185.06.B",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272"
+      }
+    },
+    {
+      "id": "overtime-hours",
+      "label": "The added hours were paid as overtime",
+      "description": "Additional hours that require an overtime premium under California Labor Code § 510.",
+      "citation": {
+        "code": "LAMC § 185.06.B",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361272"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline hours, shifts or locations not on your posted schedule (consent must be in writing)",
+      "citation": {
+        "code": "LAMC § 185.04",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361300"
+      }
+    },
+    {
+      "label": "Extra hours must be offered to current employees before new hires",
+      "citation": {
+        "code": "LAMC § 185.05",
+        "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361181"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "Los Angeles Office of Wage Standards",
+    "url": "https://wagesla.lacity.gov/fair-work-week-information",
+    "complaintUrl": "https://wagesla.lacity.gov/sites/g/files/wph1941/files/2025-03/250310%20Complaint%20Form.pdf",
+    "phone": "844-924-3752"
+  },
+  "sources": [
+    {
+      "title": "LAMC Chapter XVIII, Article 5 (Fair Work Week)",
+      "url": "https://codelibrary.amlegal.com/codes/los_angeles/latest/lamc/0-0-0-361181"
+    },
+    {
+      "title": "Office of Wage Standards: Fair Work Week",
+      "url": "https://wagesla.lacity.gov/fair-work-week-information"
+    },
+    {
+      "title": "Fair Work Week Rules and Regulations (May 2025)",
+      "url": "https://wagesla.lacity.gov/sites/g/files/wph1941/files/2025-05/FWWO-RulesandRegulations-2025-05-08.pdf"
+    },
+    {
+      "title": "Fair Work Week FAQ (March 2025)",
+      "url": "https://wagesla.lacity.gov/sites/g/files/wph1941/files/2025-05/Fair%20Work%20Week%20FAQs%20250304.pdf"
+    }
+  ],
+  "notes": [
+    "Notice is measured to 12:00 a.m. on the first day of the work schedule: a premium is owed for any change made after the schedule's 14-day posting deadline, whichever shift it affects.",
+    "The rest premium is time and a half on every hour of the second shift (OWS FAQ), minus hours already paid an overtime premium. Shiftowed shows the extra half-time.",
+    "Same-workday split shifts are not covered by the rest rule.",
+    "The Office of Wage Standards asks workers to give the employer a Notice to Cure before filing a complaint."
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "$schema": "../schema/jurisdiction.schema.json",
+  "id": "us-pa-philadelphia",
+  "name": "Philadelphia, Pennsylvania",
+  "shortName": "Philadelphia",
+  "law": "Fair Workweek Employment Standards",
+  "region": { "country": "US", "state": "PA", "city": "Philadelphia" },
+  "timeZone": "America/New_York",
+  "currency": "USD",
+  "status": "in-force",
+  "effective": "2021-01-01",
+  "lastVerified": "2026-11-19",
+  "coverage": {
+    "summary": "Retail, hospitality (hotels and motels) and food service employers with 250 or more employees and 30 or more locations worldwide, counting chains and franchise networks together.",
+    "industries": ["Retail", "Hospitality", "Food services"],
+    "employerThreshold": "250+ employees and 30+ locations worldwide",
+    "employees": "Employees who work in Philadelphia, are eligible for overtime under state or federal law, and do retail, food service or hospitality work. Part-time, seasonal and temporary workers are included."
+  },
+  "advanceNotice": {
+    "hours": 336,
+    "label": "14 days",
+    "citation": {
+      "code": "Phila. Code § 9-4602(4)",
+      "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6",
+      "quote": "The Work Schedule shall be posted no later than 14 days before the first day of any new schedule beginning January 1, 2021."
+    }
+  },
+  "premiums": [
+    {
+      "id": "added-or-moved",
+      "group": "schedule-change",
+      "label": "Time added, or shift moved without losing hours, after the posting deadline",
+      "on": ["add", "extend", "move"],
+      "notice": { "maxHours": 312, "to": "schedule" },
+      "minChangeMinutes": 21,
+      "amount": { "type": "hoursOfPay", "hours": 1 },
+      "exceptions": [
+        "employee-requested",
+        "shift-swap",
+        "operations-stopped",
+        "mass-communication",
+        "ticketed-event",
+        "banquet"
+      ],
+      "citation": {
+        "code": "Phila. Code § 9-4603(1)(a)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6",
+        "quote": "One hour of Predictability Pay at the employee's regular rate of pay, when the Covered Employer adds time to a work shift or changes the date or time or location of a work shift, with no loss of hours."
+      }
+    },
+    {
+      "id": "hours-lost",
+      "group": "schedule-change",
+      "label": "Hours cut or shift cancelled after the posting deadline",
+      "on": ["reduce", "cancel"],
+      "notice": { "maxHours": 312, "to": "schedule" },
+      "minChangeMinutes": 21,
+      "amount": { "type": "perLostHour", "multiplier": 0.5 },
+      "exceptions": [
+        "employee-requested",
+        "shift-swap",
+        "operations-stopped",
+        "termination",
+        "discipline",
+        "ticketed-event",
+        "banquet"
+      ],
+      "citation": {
+        "code": "Phila. Code § 9-4603(1)(b)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6",
+        "quote": "Predictability Pay calculated as no less than one-half times the employee's regular rate of pay per hour, for any scheduled hours the employee does not work because the Covered Employer subtracts hours from a regular or on-call shift or cancels a shift."
+      }
+    }
+  ],
+  "rest": [
+    {
+      "id": "rest-between-shifts",
+      "label": "Less than 9 hours between shifts",
+      "minRestHours": 9,
+      "amount": { "type": "flat", "dollars": 40 },
+      "citation": {
+        "code": "Phila. Code § 9-4604(2)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6",
+        "quote": "A Covered Employer shall compensate the employee for each instance that the employee works a shift described in subsection 9-4604(1) [less than 9 hours after the end of the previous day's shift], in the amount of $40 for each such shift."
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "employee-requested",
+      "label": "I asked for this change in writing",
+      "description": "The employee requested the change in writing, including adding or dropping hours and using sick, vacation or other leave.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(a)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "shift-swap",
+      "label": "Shift trade or coverage I agreed to with a coworker",
+      "description": "A mutually agreed shift trade or coverage arrangement between employees.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(b)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "operations-stopped",
+      "label": "Work couldn't begin or continue",
+      "description": "Threats to employees or property, a public utility failure or public transit shutdown, fire, flood or other natural disaster, a declared state of emergency, or severe weather that disrupts transportation or threatens safety.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(c)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "mass-communication",
+      "label": "I volunteered for hours offered to a group",
+      "description": "The employee volunteered, in response to a written mass communication stating that it was voluntary, for hours left open because another employee could not work.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(e)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "termination",
+      "label": "Hours lost because my job ended",
+      "description": "Hours subtracted because employment was terminated.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(f)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "discipline",
+      "label": "Documented multi-day disciplinary suspension",
+      "description": "Hours subtracted for discipline through a suspension of more than one day, with the incident documented in writing.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(h)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "ticketed-event",
+      "label": "Ticketed event changed for reasons outside the employer's control",
+      "description": "A ticketed event was cancelled, scheduled, rescheduled, postponed, delayed, ran longer, or had at least 20% more attendance than expected, for reasons outside the employer's control after the schedule was posted.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(i)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "id": "banquet",
+      "label": "Hotel banquet booked after the schedule was posted",
+      "description": "A hotel banquet event was scheduled for reasons outside the employer's control after the schedule was posted.",
+      "citation": {
+        "code": "Phila. Code § 9-4603(2)(j)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    }
+  ],
+  "otherRights": [
+    {
+      "label": "Right to decline hours not on your posted schedule (consent must be in writing)",
+      "citation": {
+        "code": "Phila. Code § 9-4602(6)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    },
+    {
+      "label": "Right to decline shifts that start less than 9 hours after your last one",
+      "citation": {
+        "code": "Phila. Code § 9-4604(1)",
+        "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+      }
+    }
+  ],
+  "enforcement": {
+    "agency": "Philadelphia Office of Worker Protections (Department of Labor)",
+    "url": "https://www.phila.gov/documents/fair-workweek-resources/",
+    "complaintUrl": "https://www.phila.gov/services/working-jobs/worker-protections/wage-protections/report-a-fair-workweek-violation/",
+    "phone": "215-686-0802"
+  },
+  "sources": [
+    {
+      "title": "Bill 180649-A, certified copy (Fair Workweek Employment Standards)",
+      "url": "https://phila.legistar.com/View.ashx?M=F&ID=6949998&GUID=21F1B092-4F9F-48DE-9F3F-C7168B82DCE6"
+    },
+    {
+      "title": "Bill 250065 (Enforcement of Worker Protection Ordinances, 2025)",
+      "url": "https://phila.legistar.com/View.ashx?M=F&ID=14237484&GUID=A62FB653-A390-437F-B0E9-284CCD43CEF1"
+    },
+    {
+      "title": "Philadelphia Fair Workweek resources",
+      "url": "https://www.phila.gov/documents/fair-workweek-resources/"
+    }
+  ],
+  "notes": [
+    "Predictability pay is owed for changes made after the 14-day posting deadline, measured to the first day of the schedule. Changes made within 24 hours after that deadline are exempt (§ 9-4603(2)(g)), so Shiftowed charges for changes made less than 13 days before the schedule starts.",
+    "Starting or ending no more than 20 minutes early or late is exempt (§ 9-4603(2)(d)); Shiftowed applies this as a 21-minute threshold.",
+    "The $40 rest premium is owed even when you agreed to work the shift.",
+    "Tipped employees' regular rate is set each year by regulation (reported as $17.88/hour for July 2026 to June 2027). Check the city's current figure and enter it as your rate."
+  ]
+}
