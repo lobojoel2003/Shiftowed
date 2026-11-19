@@ -1,0 +1,58 @@
+{
+  "name": "shiftowed-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shiftowed: a Fair Workweek predictability-pay calculator for hourly workers.",
+  "license": "GPL-3.0-or-later",
+  "author": "Joel Stain Lobo (https://github.com/lobojoel2003)",
+  "homepage": "https://github.com/lobojoel2003/Shiftowed#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lobojoel2003/Shiftowed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lobojoel2003/Shiftowed/issues"
+  },
+  "type": "module",
+  "workspaces": [
+    "packages/rules",
+    "packages/app"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "npm run build -w @shiftowed/rules && npm run build -w shiftowed",
+    "dev": "npm run dev -w shiftowed",
+    "preview": "npm run preview -w shiftowed",
+    "test": "npm run test -w @shiftowed/rules && npm run test -w shiftowed",
+    "test:coverage": "npm run test:coverage -w @shiftowed/rules && npm run test:coverage -w shiftowed",
+    "e2e": "npm run e2e -w shiftowed",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck -w @shiftowed/rules && npm run typecheck -w shiftowed",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate:rules": "npm run validate -w @shiftowed/rules",
+    "screenshots": "node scripts/screenshots.mjs",
+    "icons": "node scripts/render-icons.mjs",
+    "version:bump": "node scripts/bump-version.mjs",
+    "release:notes": "node scripts/release-notes.mjs",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run validate:rules && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.0.0",
+    "ajv": "^8.20.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0"
+  },
+  "overrides": {
+    "workbox-build": {
+      "glob": "^14.0.2"
+    }
+  }
+}
