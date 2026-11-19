@@ -35,6 +35,12 @@ git push origin main v1.1.0
 
 Pushing the tag starts the **Release** workflow.
 
+## Release from GitHub without pushing a tag
+
+Open **Actions > Release > Run workflow**, choose `main`, and enter the version tag (for example `v1.1.0`). If the tag
+doesn't exist yet, the workflow checks it against the package versions, creates it on the latest commit of the chosen
+branch (attributed to you), and then releases it.
+
 ## What the Release workflow does
 
 1. Checks that the tag matches every `package.json` and that `CHANGELOG.md` has a section for it.

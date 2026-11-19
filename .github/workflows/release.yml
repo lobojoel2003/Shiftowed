@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing tag to release (for example v1.0.0)
+        description: Version tag to release, for example v1.0.0. If the tag doesn't exist yet, it is created on the chosen branch's latest commit.
         required: true
 
 permissions:
@@ -21,8 +21,36 @@ env:
   FORCE_COLOR: "1"
 
 jobs:
+  tag:
+    name: Ensure tag ${{ github.event.inputs.tag || github.ref_name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Create the tag for a manual release
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          ACTOR: ${{ github.actor }}
+          ACTOR_ID: ${{ github.actor_id }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" > /dev/null; then
+            echo "Tag $TAG already exists; releasing it as is."
+            exit 0
+          fi
+          node scripts/check-version.mjs "$TAG"
+          git config user.name "$ACTOR"
+          git config user.email "$ACTOR_ID+$ACTOR@users.noreply.github.com"
+          git tag -a "$TAG" -m "Shiftowed $TAG"
+          git push origin "refs/tags/$TAG"
+          echo "Created $TAG at $(git rev-parse --short HEAD)." >> "$GITHUB_STEP_SUMMARY"
+
   verify:
     name: Verify ${{ github.event.inputs.tag || github.ref_name }}
+    needs: tag
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
