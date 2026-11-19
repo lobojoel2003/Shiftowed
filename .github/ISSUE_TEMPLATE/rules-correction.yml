@@ -1,0 +1,40 @@
+name: Rules correction or new law
+description: A number, citation or notice window is wrong, a law changed, or a city is missing.
+title: "[rules] "
+labels: [rules]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Every number in Shiftowed must point to the law, so please link the primary source
+        (the municipal code, statute, or the enforcing agency's own page or rules), not a news article or vendor blog.
+  - type: input
+    id: jurisdiction
+    attributes:
+      label: Jurisdiction
+      placeholder: e.g. us-ny-nyc-fast-food, or "Evanston, IL (new)"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing?
+      placeholder: "The cut-shift premium with less than 7 days' notice should be ... because ..."
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source URL
+      placeholder: https://codelibrary.amlegal.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: quote
+    attributes:
+      label: Exact wording from the source
+      render: text
+  - type: input
+    id: effective
+    attributes:
+      label: Effective date of the change (if the law changed)

@@ -1,0 +1,47 @@
+name: Version bump
+
+# One-click release: bumps every package.json, moves the "Unreleased" changelog
+# entries under the new version, commits, tags, and starts the Release workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Which part of the version to bump
+        type: choice
+        options: [patch, minor, major, prerelease]
+        default: patch
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Bump versions
+        id: bump
+        run: |
+          version=$(node scripts/bump-version.mjs "${{ inputs.bump }}")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - run: npm install --package-lock-only --ignore-scripts
+      - name: Commit and tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore(release): v${{ steps.bump.outputs.version }}"
+          git tag -a "v${{ steps.bump.outputs.version }}" -m "Shiftowed v${{ steps.bump.outputs.version }}"
+          git push origin main "v${{ steps.bump.outputs.version }}"
+      - name: Start the Release workflow
+        # Tags pushed with GITHUB_TOKEN don't trigger workflows, but a dispatch does.
+        run: gh workflow run release.yml -f tag="v${{ steps.bump.outputs.version }}"
+        env:
+          GH_TOKEN: ${{ github.token }}

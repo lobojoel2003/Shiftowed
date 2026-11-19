@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: "1"
+
+jobs:
+  quality:
+    name: Format, lint, types
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+
+  test:
+    name: Unit tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - name: Validate rules data against the JSON Schema
+        run: npm run validate:rules
+      - name: Unit tests with coverage
+        run: npm run test:coverage
+      - name: Coverage summary
+        if: matrix.node == 22
+        run: node scripts/coverage-summary.mjs >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: matrix.node == 22
+        with:
+          name: coverage
+          path: packages/*/coverage
+          retention-days: 14
+
+  build:
+    name: Build (build ${{ github.run_number }})
+    needs: [quality, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BUILD_NUMBER: ${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Pack the rules library
+        run: npm pack -w @shiftowed/rules --pack-destination packages/rules
+      - name: Smoke-test the CLI from the packed tarball
+        run: |
+          cd "$RUNNER_TEMP"
+          npm init -y > /dev/null
+          npm install "$GITHUB_WORKSPACE"/packages/rules/shiftowed-rules-*.tgz
+          npx shiftowed-rules list
+          npx shiftowed-rules evaluate us-wa-seattle "$GITHUB_WORKSPACE/packages/rules/examples/seattle-cut.json" --rate 20 | tee out.txt
+          grep -q 'Total owed: \$60.00' out.txt
+      - uses: actions/upload-artifact@v7
+        with:
+          name: shiftowed-pwa-build-${{ github.run_number }}
+          path: packages/app/dist
+          retention-days: 14
+      - uses: actions/upload-artifact@v7
+        with:
+          name: shiftowed-rules-package-${{ github.run_number }}
+          path: packages/rules/shiftowed-rules-*.tgz
+          retention-days: 14
+
+  e2e:
+    name: End-to-end (Playwright)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - uses: actions/download-artifact@v8
+        with:
+          name: shiftowed-pwa-build-${{ github.run_number }}
+          path: packages/app/dist
+      - run: npm run e2e
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: packages/app/playwright-report
+          retention-days: 7

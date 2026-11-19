@@ -1,0 +1,32 @@
+name: Bug report
+description: Something in the app or the rules library doesn't work.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Please don't paste personal details or your real schedule. A made-up example is perfect.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Choose Seattle\n2. Add a schedule ...\n3. ..."
+  - type: input
+    id: version
+    attributes:
+      label: Version and build
+      description: Settings > About shows them, e.g. v1.0.0 (build 42, 1a2b3c4).
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: Pixel 8, Chrome 142

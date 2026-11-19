@@ -1,0 +1,123 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to release (for example v1.0.0)
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.event.inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  TAG: ${{ github.event.inputs.tag || github.ref_name }}
+  FORCE_COLOR: "1"
+
+jobs:
+  verify:
+    name: Verify ${{ github.event.inputs.tag || github.ref_name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Tag matches package versions
+        run: node scripts/check-version.mjs "$TAG"
+      - name: Changelog has an entry for this version
+        run: node scripts/release-notes.mjs "$TAG" > /dev/null
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run validate:rules
+      - run: npm test
+
+  build:
+    name: Build release assets
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BUILD_NUMBER: ${{ github.run_number }}
+      RELEASE_CHANNEL: release
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Package assets
+        run: node scripts/package-release.mjs "$TAG"
+      - name: Release notes
+        run: node scripts/release-notes.mjs "$TAG" > release/RELEASE_NOTES.md
+      - uses: actions/upload-artifact@v7
+        with:
+          name: release-${{ env.TAG }}
+          path: release
+          retention-days: 30
+
+  github-release:
+    name: Publish GitHub release
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: release-${{ env.TAG }}
+          path: release
+      - uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ env.TAG }}
+          name: Shiftowed ${{ env.TAG }}
+          body_path: release/RELEASE_NOTES.md
+          prerelease: ${{ contains(env.TAG, '-') }}
+          make_latest: ${{ !contains(env.TAG, '-') }}
+          files: |
+            release/*.zip
+            release/*.tgz
+            release/SHA256SUMS.txt
+          fail_on_unmatched_files: true
+
+  npm:
+    name: Publish @shiftowed/rules to npm
+    needs: build
+    # Opt in with a repository variable PUBLISH_NPM=true (and npm trusted
+    # publishing, or an NPM_TOKEN secret). See RELEASING.md.
+    if: vars.PUBLISH_NPM == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm publish -w @shiftowed/rules --provenance --access public --tag ${{ contains(env.TAG, '-') && 'next' || 'latest' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
